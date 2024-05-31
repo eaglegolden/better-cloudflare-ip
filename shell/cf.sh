@@ -55,7 +55,7 @@ then
 	colo=获取超时
 else
 	publicip=$(echo ${temp[@]} | sed -e 's/ /\n/g' | grep ip= | cut -f 2- -d'=')
-	colo=$(grep -w "($(echo ${temp[@]} | sed -e 's/ /\n/g' | grep colo= | cut -f 2- -d'='))" ipv4.txt | awk -F"-" '{print $1}')
+	colo=$(grep -w "($(echo ${temp[@]} | sed -e 's/ /\n/g' | grep colo= | cut -f 2- -d'='))" colo.txt | awk -F"-" '{print $1}')
 fi
 clear
 echo "优选IP $anycast"
@@ -417,28 +417,28 @@ fi
 function datacheck(){
 clear
 echo "如果这些下面这些文件下载失败,可以手动访问网址下载保存至同级目录"
+echo "https://www.baipiao.eu.org/cloudflare/colo 另存为 colo.txt"
+echo "https://www.baipiao.eu.org/cloudflare/url 另存为 url.txt"
 echo "https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt 另存为 ipv4.txt"
-echo "https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt 另存为 ipv4.txt"
-echo "https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt 另存为 ipv4.txt"
-echo "https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt 另存为 ipv4.txt"
+echo "https://www.baipiao.eu.org/cloudflare/ips-v6 另存为 ips-v6.txt"
 while true
 do
-	if [ ! -f "ipv4.txt" ]
+	if [ ! -f "colo.txt" ]
 	then
-		echo "从服务器下载数据中心信息 ipv4.txt"
-		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
+		echo "从服务器下载数据中心信息 colo.txt"
+		curl --retry 2 -s https://www.baipiao.eu.org/cloudflare/colo -o colo.txt
 	elif [ ! -f "url.txt" ]
 	then
-		echo "从服务器下载测速文件地址 ipv4.txt"
-		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
-	elif [ ! -f "ips-v4.txt" ]
+		echo "从服务器下载测速文件地址 url.txt"
+		curl --retry 2 -s https://www.baipiao.eu.org/cloudflare/url -o url.txt
+	elif [ ! -f "ipv4.txt" ]
 	then
 		echo "从服务器下载IPV4数据 ipv4.txt"
-		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
+		curl --retry 2 -s https://www.baipiao.eu.org/cloudflare/ips-v4 -o ipv4.txt
 	elif [ ! -f "ips-v6.txt" ]
 	then
-		echo "从服务器下载IPV6数据 ipv4.txt"
-		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
+		echo "从服务器下载IPV6数据 ips-v6.txt"
+		curl --retry 2 -s https://www.baipiao.eu.org/cloudflare/ips-v6 -o ips-v6.txt
 	else
 		break
 	fi
@@ -490,7 +490,7 @@ do
 	if [ $menu == 3 ]
 	then
 		ips=ipv6
-		filename=ipv4.txt
+		filename=ips-v6.txt
 		tls=1
 		bettercloudflareip
 		break
@@ -498,7 +498,7 @@ do
 	if [ $menu == 4 ]
 	then
 		ips=ipv6
-		filename=ipv4.txt
+		filename=ips-v6.txt
 		tls=0
 		bettercloudflareip
 		break
@@ -523,7 +523,7 @@ do
 	fi
 	if [ $menu == 8 ]
 	then
-		rm -rf ipv4.txt
+		rm -rf colo.txt url.txt ipv4.txt ips-v6.txt
 		datacheck
 		clear
 	fi
