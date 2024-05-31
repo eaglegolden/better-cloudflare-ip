@@ -423,7 +423,7 @@ echo "https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/mas
 echo "https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt 另存为 ipv4.txt"
 while true
 do
-	if [ ! -f "colo.txt" ]
+	if [ ! -f "ipv4.txt" ]
 	then
 		echo "从服务器下载数据中心信息 ipv4.txt"
 		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
@@ -523,7 +523,7 @@ do
 	fi
 	if [ $menu == 8 ]
 	then
-		rm -rf colo.txt url.txt ips-v4.txt ips-v6.txt
+		rm -rf ipv4.txt
 		datacheck
 		clear
 	fi
