@@ -55,7 +55,7 @@ then
 	colo=获取超时
 else
 	publicip=$(echo ${temp[@]} | sed -e 's/ /\n/g' | grep ip= | cut -f 2- -d'=')
-	colo=$(grep -w "($(echo ${temp[@]} | sed -e 's/ /\n/g' | grep colo= | cut -f 2- -d'='))" colo.txt | awk -F"-" '{print $1}')
+	colo=$(grep -w "($(echo ${temp[@]} | sed -e 's/ /\n/g' | grep colo= | cut -f 2- -d'='))" ipv4.txt | awk -F"-" '{print $1}')
 fi
 clear
 echo "优选IP $anycast"
@@ -425,19 +425,19 @@ while true
 do
 	if [ ! -f "colo.txt" ]
 	then
-		echo "从服务器下载数据中心信息 colo.txt"
+		echo "从服务器下载数据中心信息 ipv4.txt"
 		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
 	elif [ ! -f "url.txt" ]
 	then
-		echo "从服务器下载测速文件地址 url.txt"
+		echo "从服务器下载测速文件地址 ipv4.txt"
 		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
 	elif [ ! -f "ips-v4.txt" ]
 	then
-		echo "从服务器下载IPV4数据 ips-v4.txt"
+		echo "从服务器下载IPV4数据 ipv4.txt"
 		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
 	elif [ ! -f "ips-v6.txt" ]
 	then
-		echo "从服务器下载IPV6数据 ips-v6.txt"
+		echo "从服务器下载IPV6数据 ipv4.txt"
 		curl --retry 2 -s https://raw.githubusercontent.com/djiejeowmwowmwo/better-cloudflare-ip/master/ipv4.txt -o ipv4.txt
 	else
 		break
